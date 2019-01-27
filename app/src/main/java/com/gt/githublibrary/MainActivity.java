@@ -16,8 +16,6 @@ import com.lidong.photopicker.intent.PhotoPickerIntent;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
-    private static final int REQUEST_CAMERA_CODE = 10;
-    private static final int REQUEST_PREVIEW_CODE = 20;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
