@@ -1,5 +1,21 @@
 ## 拍照、图片选择框架
-### 如何使用：
+#### 使用方法：
+#### 依赖
+将其添加到根build.gradle文件（而不是模块build.gradle文件）中：
+
+```Xml
+    allprojects {
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
+    }
+```
+然后，将库添加到模块中 build.gradle
+```Xml
+    dependencies {
+        implementation 'com.github.goodgt:PhotoPicker:1.0.0'
+    }
+```
 #### 调用
 ```Java
   PhotoPickerIntent intent = new PhotoPickerIntent(MainActivity.this);
@@ -33,7 +49,7 @@ void setSelectModel(SelectModel model);
 ```Java
 void setMaxTotal(int total);
 ```
-##### 设置是否选手拍照按钮
+##### 设置是否显示拍照按钮
 ```Java
 void setShowCarema(boolean bool);
 ```
