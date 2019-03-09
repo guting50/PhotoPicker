@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lidong.photopicker">
+    package="com.gt.photopicker">
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
-            android:name="com.lidong.photopicker.PhotoPickerActivity"
+            android:name="com.gt.photopicker.PhotoPickerActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/PhotoPickerTheme" />
 
         <activity
-            android:name="com.lidong.photopicker.PhotoPreviewActivity"
+            android:name="com.gt.photopicker.PhotoPreviewActivity"
             android:theme="@style/PhotoPickerTheme" />
 
         <activity
@@ -20,7 +20,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <provider
-            android:name=".intent.PhotoPickerFileProvider"
+            android:name="com.gt.photopicker.intent.PhotoPickerFileProvider"
             android:authorities="${applicationId}.photopicker.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">

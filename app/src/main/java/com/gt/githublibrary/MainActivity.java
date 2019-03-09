@@ -9,9 +9,9 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 
-import com.lidong.photopicker.PhotoPickerActivity;
-import com.lidong.photopicker.SelectModel;
-import com.lidong.photopicker.intent.PhotoPickerIntent;
+import com.gt.photopicker.PhotoPickerActivity;
+import com.gt.photopicker.SelectModel;
+import com.gt.photopicker.intent.PhotoPickerIntent;
 
 import java.util.ArrayList;
 

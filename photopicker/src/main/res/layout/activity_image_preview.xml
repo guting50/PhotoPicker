@@ -8,7 +8,7 @@
 
     <include layout="@layout/photopicker_toolbar" />
 
-    <com.lidong.photopicker.widget.ViewPagerFixed
+    <com.gt.photopicker.widget.ViewPagerFixed
         android:id="@+id/vp_photos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
