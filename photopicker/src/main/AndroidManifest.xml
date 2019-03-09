@@ -20,13 +20,13 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name=".intent.PhotoPickerFileProvider"
             android:authorities="${applicationId}.photopicker.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/gt_provider_paths" />
+                android:resource="@xml/photo_picker_provider_paths" />
         </provider>
     </application>
 </manifest>
