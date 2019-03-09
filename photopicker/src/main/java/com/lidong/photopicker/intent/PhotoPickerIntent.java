@@ -19,7 +19,7 @@ public class PhotoPickerIntent extends Intent {
 
     public PhotoPickerIntent(Context packageContext) {
         super(packageContext, PhotoPickerActivity.class);
-        fileProvider = packageContext.getPackageName() + ".fileprovider";
+        fileProvider = packageContext.getPackageName() + ".photopicker.fileprovider";
     }
 
     public void setShowCarema(boolean bool) {

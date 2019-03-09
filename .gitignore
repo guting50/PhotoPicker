@@ -1,0 +1,11 @@
+/local.properties
+.DS_Store
+*.log
+.idea/
+*.iml
+.gradle
+*.apk
+build/*
+.idea/encodings.xml
+/gradle.properties
+*/build/*
