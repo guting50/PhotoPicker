@@ -1,11 +1,5 @@
-/local.properties
-.DS_Store
-*.log
+app/build/
+.gradle/
+.idea/misc.xml
 .idea/
 *.iml
-.gradle
-*.apk
-build/*
-.idea/encodings.xml
-/gradle.properties
-*/build/*
