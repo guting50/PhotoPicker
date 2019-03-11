@@ -17,13 +17,14 @@
     }
 ```
 #### 调用
+##### 方式一
 ```Java
   PhotoPickerIntent intent = new PhotoPickerIntent(MainActivity.this);
   intent.setSelectModel(SelectModel.MULTI);
   intent.setShowCarema(true);
   startActivityForResult(intent, 999);
 ```
-#### 选择后回调
+###### 选择后回调
 ```Java
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -40,8 +41,23 @@
         }
     }
 ```
+##### 方式二
+```Java
+  PhotoPickerIntent intent = new PhotoPickerIntent(MainActivity.this);
+  intent.setSelectModel(SelectModel.MULTI);
+  intent.setShowCarema(true);
+  intent.gotoPhotoPickerActivity(MainActivity.this, new PhotoPickerActivity.OnSelectedCallbackListener() {
+        @Override
+                    public void onSelectedCallback(ArrayList<String> resultList) {
+                        for (String str : resultList) {
+                            Log.e("imgPath", str);
+                        }
+                    }
+                });
+```
+
 #### api
-##### 设置选择模式，单选（SelectModel.SINGLE）还是多选（SelectModel.MULTI）
+##### 设置选择模式，默认单张 单选（SelectModel.SINGLE）还是多选（SelectModel.MULTI）
 ```Java
 void setSelectModel(SelectModel model);
 ```
@@ -49,15 +65,15 @@ void setSelectModel(SelectModel model);
 ```Java
 void setMaxTotal(int total);
 ```
-##### 设置是否显示拍照按钮
+##### 设置是否显示拍照按钮 默认不显示
 ```Java
 void setShowCarema(boolean bool);
 ```
-##### 设置默认选中图片
+##### 默认已选择的照片地址（做回显用）
 ```Java
 void setSelectedPaths(ArrayList<String> imagePathis);
 ```
-##### 设置图片属性
+##### 显示相册图片的属性（详见 ImageConfig）
 ```Java
 void setImageConfig(ImageConfig config);
 ```
