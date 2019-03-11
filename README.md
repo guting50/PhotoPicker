@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/goodgt/PhotoPicker.svg)](https://jitpack.io/#goodgt/PhotoPicker)
+
 ## 拍照、图片选择框架
 #### 使用方法：
 #### 依赖
