@@ -29,7 +29,17 @@ public class MainActivity extends Activity {
                 PhotoPickerIntent intent = new PhotoPickerIntent(MainActivity.this);
                 intent.setSelectModel(SelectModel.MULTI);
                 intent.setShowCarema(true);
-                startActivityForResult(intent, 999);
+                //方式一
+//                startActivityForResult(intent, 999);
+                //方式二
+                intent.gotoPhotoPickerActivity(MainActivity.this, new PhotoPickerActivity.OnSelectedCallbackListener() {
+                    @Override
+                    public void onSelectedCallback(ArrayList<String> resultList) {
+                        for (String str : resultList) {
+                            Log.e("imgPath", str);
+                        }
+                    }
+                });
             }
         });
     }

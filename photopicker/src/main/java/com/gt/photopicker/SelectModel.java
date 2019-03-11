@@ -5,8 +5,8 @@ package com.gt.photopicker;
  * Created by foamtrace on 2015/8/25.
  */
 public enum SelectModel {
-    SINGLE(PhotoPickerActivity.MODE_SINGLE),
-    MULTI(PhotoPickerActivity.MODE_MULTI);
+    SINGLE(PhotoPickerActivity.MODE_SINGLE), //单张
+    MULTI(PhotoPickerActivity.MODE_MULTI); // 多张
 
     private int model;
 

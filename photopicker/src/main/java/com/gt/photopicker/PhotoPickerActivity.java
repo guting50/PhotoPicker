@@ -15,6 +15,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +30,9 @@ import com.gt.photopicker.intent.PhotoPreviewIntent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PhotoPickerActivity extends AppCompatActivity {
 
@@ -100,6 +103,8 @@ public class PhotoPickerActivity extends AppCompatActivity {
 
     private boolean hasFolderGened = false;
     private boolean mIsShowCamera = false;
+
+    public static Map<Long, OnSelectedCallbackListener> callbackListeners = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -280,14 +285,6 @@ public class PhotoPickerActivity extends AppCompatActivity {
         });
     }
 
-    public void onSingleImageSelected(String path) {
-        Intent data = new Intent();
-        resultList.add(path);
-        data.putStringArrayListExtra(EXTRA_RESULT, resultList);
-        setResult(RESULT_OK, data);
-        finish();
-    }
-
     public void onImageSelected(String path) {
         if (!resultList.contains(path)) {
             resultList.add(path);
@@ -389,7 +386,7 @@ public class PhotoPickerActivity extends AppCompatActivity {
                 mImageAdapter.select(image);
             } else if (mode == MODE_SINGLE) {
                 // 单选模式
-                onSingleImageSelected(image.path);
+                complete(image.path);
             }
         }
     }
@@ -579,6 +576,18 @@ public class PhotoPickerActivity extends AppCompatActivity {
 
     // 返回已选择的图片数据
     private void complete() {
+        complete(null);
+    }
+
+    private void complete(String path) {
+        if (!TextUtils.isEmpty(path))
+            resultList.add(path);
+
+        OnSelectedCallbackListener listener = callbackListeners.get(getIntent().getLongExtra("key", -1));
+        if (listener != null) {
+            listener.onSelectedCallback(resultList);
+        }
+
         Intent data = new Intent();
         data.putStringArrayListExtra(EXTRA_RESULT, resultList);
         setResult(RESULT_OK, data);
@@ -595,5 +604,9 @@ public class PhotoPickerActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         captureManager.onRestoreInstanceState(savedInstanceState);
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    public interface OnSelectedCallbackListener {
+        void onSelectedCallback(ArrayList<String> resultList);
     }
 }
