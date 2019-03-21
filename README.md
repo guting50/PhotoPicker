@@ -15,7 +15,7 @@
 然后，将库添加到模块中 build.gradle
 ```Xml
     dependencies {
-        implementation 'com.github.goodgt:PhotoPicker:1.0.0'
+        implementation 'com.github.goodgt:PhotoPicker:Tag'
     }
 ```
 #### 调用
