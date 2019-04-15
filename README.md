@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/goodgt/PhotoPicker.svg)](https://jitpack.io/#goodgt/PhotoPicker)
+[![](https://jitpack.io/v/guting50/PhotoPicker.svg)](https://jitpack.io/#guting50/PhotoPicker)
 
 ## 拍照、图片选择框架
 #### 使用方法：
@@ -15,7 +15,7 @@
 然后，将库添加到模块中 build.gradle
 ```Xml
     dependencies {
-        implementation 'com.github.goodgt:PhotoPicker:Tag'
+        implementation 'com.github.guting50:PhotoPicker:Tag'
     }
 ```
 #### 调用
