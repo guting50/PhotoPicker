@@ -25,7 +25,7 @@ public class PhotoPickerIntent extends Intent {
     }
 
     /**
-     * 时候显示拍照按钮 默认不显示
+     * 是否显示拍照按钮 默认不显示
      *
      * @param bool
      */
