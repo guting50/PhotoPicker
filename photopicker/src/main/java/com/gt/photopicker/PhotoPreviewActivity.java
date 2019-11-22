@@ -6,17 +6,21 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.gt.photopicker.widget.ViewPagerFixed;
+import com.gt.utils.FileUtils;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -172,16 +176,20 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
             });
         } else if (i == R.id.action_edit) {
             currentPath = paths.get(mViewPager.getCurrentItem());
-            File photoFile = new File(currentPath);
-            Uri imageUri = Uri.fromFile(photoFile);
-            UCrop.Options options = new UCrop.Options();
-            options.setToolbarColor(Color.parseColor("#ff212121"));
-            options.setStatusBarColor(Color.parseColor("#000000"));
-            File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
-                    + File.separator + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg");
-            UCrop.of(imageUri, Uri.fromFile(storageDir))
-                    .withOptions(options)
-                    .start(this);
+            if (FileUtils.getMIMEType(currentPath).contains("video")) {
+                Toast.makeText(PhotoPreviewActivity.this, R.string.error_edit_video, Toast.LENGTH_LONG).show();
+            } else {
+                File photoFile = new File(currentPath);
+                Uri imageUri = Uri.fromFile(photoFile);
+                UCrop.Options options = new UCrop.Options();
+                options.setToolbarColor(Color.parseColor("#ff212121"));
+                options.setStatusBarColor(Color.parseColor("#000000"));
+                File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
+                        + File.separator + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg");
+                UCrop.of(imageUri, Uri.fromFile(storageDir))
+                        .withOptions(options)
+                        .start(this);
+            }
         }
         return super.onOptionsItemSelected(item);
     }

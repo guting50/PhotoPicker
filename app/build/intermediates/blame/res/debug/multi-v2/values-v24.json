@@ -4,7 +4,7 @@
             "outputFile": "D:\\project\\GitHubLibrary\\PhotoPicker\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-28.0.0.aar\\04b500137b3d4c64546a97fa195a54c2\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\b9584cc1086e2b588e03c80cb8e5d7cc\\media-1.0.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\bf8d0d0cfb67e1c1faa90f5ebccc915f\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\5825a923fb222a5dd45a120c7c7fddd7\\appcompat-1.1.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

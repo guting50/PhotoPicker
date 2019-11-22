@@ -6,15 +6,18 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.Toolbar;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.Toolbar;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -33,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class PhotoPickerActivity extends AppCompatActivity {
 
@@ -424,51 +428,52 @@ public class PhotoPickerActivity extends AppCompatActivity {
             // 根据图片设置参数新增验证条件
             StringBuilder selectionArgs = new StringBuilder();
 
-            if (imageConfig != null) {
-                if (imageConfig.minWidth != 0) {
-                    selectionArgs.append(MediaStore.Images.Media.WIDTH + " >= " + imageConfig.minWidth);
-                }
+            if (imageConfig != null && imageConfig.minWidth != 0) {
+                selectionArgs.append(MediaStore.Images.Media.WIDTH + " >= " + imageConfig.minWidth);
+            }
 
-                if (imageConfig.minHeight != 0) {
-                    selectionArgs.append("".equals(selectionArgs.toString()) ? "" : " and ");
-                    selectionArgs.append(MediaStore.Images.Media.HEIGHT + " >= " + imageConfig.minHeight);
-                }
+            if (imageConfig != null && imageConfig.minHeight != 0) {
+                selectionArgs.append("".equals(selectionArgs.toString()) ? "" : " and ");
+                selectionArgs.append(MediaStore.Images.Media.HEIGHT + " >= " + imageConfig.minHeight);
+            }
 
-                if (imageConfig.minSize != 0f) {
-                    selectionArgs.append("".equals(selectionArgs.toString()) ? "" : " and ");
-                    selectionArgs.append(MediaStore.Images.Media.SIZE + " >= " + imageConfig.minSize);
-                }
+            if (imageConfig != null && imageConfig.minSize != 0f) {
+                selectionArgs.append("".equals(selectionArgs.toString()) ? "" : " and ");
+                selectionArgs.append(MediaStore.Images.Media.SIZE + " >= " + imageConfig.minSize);
+            }
 
-                if (imageConfig.mimeType != null) {
-                    selectionArgs.append(" and (");
-                    for (int i = 0, len = imageConfig.mimeType.length; i < len; i++) {
-                        if (i != 0) {
-                            selectionArgs.append(" or ");
-                        }
-                        selectionArgs.append(MediaStore.Images.Media.MIME_TYPE + " = '" + imageConfig.mimeType[i] + "'");
+            if (imageConfig != null && imageConfig.mimeType != null) {
+                selectionArgs.append("".equals(selectionArgs.toString()) ? "(" : " and (");
+                for (int i = 0, len = imageConfig.mimeType.length; i < len; i++) {
+                    if (i != 0) {
+                        selectionArgs.append(" or ");
                     }
-                    selectionArgs.append(")");
+                    selectionArgs.append(MediaStore.Images.Media.MIME_TYPE + " = '" + imageConfig.mimeType[i] + "'");
                 }
+                selectionArgs.append(")");
             }
 
-            if (id == LOADER_ALL) {
-                CursorLoader cursorLoader = new CursorLoader(mCxt,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
-                        selectionArgs.toString(), null, IMAGE_PROJECTION[2] + " DESC");
-                return cursorLoader;
-            } else if (id == LOADER_CATEGORY) {
-                String selectionStr = selectionArgs.toString();
-                if (!"".equals(selectionStr)) {
-                    selectionStr += " and" + selectionStr;
+            if (imageConfig != null && imageConfig.mediaType != null) {
+                selectionArgs.append("".equals(selectionArgs.toString()) ? "(" : " and (");
+                for (int i = 0, len = imageConfig.mediaType.length; i < len; i++) {
+                    if (i != 0) {
+                        selectionArgs.append(" or ");
+                    }
+                    selectionArgs.append(MediaStore.Files.FileColumns.MEDIA_TYPE + " = '" + imageConfig.mediaType[i] + "'");
                 }
-                CursorLoader cursorLoader = new CursorLoader(mCxt,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
-                        IMAGE_PROJECTION[0] + " like '%" + args.getString("path") + "%'" + selectionStr, null,
-                        IMAGE_PROJECTION[2] + " DESC");
-                return cursorLoader;
+                selectionArgs.append(")");
+            } else {
+                selectionArgs.append("".equals(selectionArgs.toString()) ? "(" : " and (");
+                selectionArgs.append(MediaStore.Files.FileColumns.MEDIA_TYPE + " = '" + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE + "')");
             }
 
-            return null;
+            Uri uri = Uri.parse("content://media/external/file");
+            String selectionArg = selectionArgs.toString();
+            if (id == LOADER_CATEGORY) {
+                selectionArg = IMAGE_PROJECTION[0] + " like '%" + args.getString("path") + "%' and " + selectionArgs.toString();
+            }
+            return new CursorLoader(mCxt, uri, IMAGE_PROJECTION,
+                    selectionArg, null, IMAGE_PROJECTION[2] + " DESC");
         }
 
         @Override

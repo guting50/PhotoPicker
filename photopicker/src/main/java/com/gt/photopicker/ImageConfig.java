@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 /**
  * 读取手机照片的限制参数
- * 属性参考：http://www.cnblogs.com/over140/archive/2012/08/29/2661752.html
  * Created by foamtrace on 2015/8/26.
  */
 public class ImageConfig implements Parcelable {
@@ -16,8 +15,10 @@ public class ImageConfig implements Parcelable {
     public int minHeight;
     // 图片大小，单位字节
     public long minSize;
-    // 照片类型: 例如 { image/jpeg, image/png, ... }
+    // 文件后缀: 例如 { image/jpeg, image/png, ... }
     public String[] mimeType;
+    // 文件类型: 例如 {MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE, MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO, ... }
+    public int[] mediaType;
 
     @Override
     public int describeContents() {
@@ -30,6 +31,7 @@ public class ImageConfig implements Parcelable {
         dest.writeInt(this.minHeight);
         dest.writeLong(this.minSize);
         dest.writeStringArray(this.mimeType);
+        dest.writeIntArray(this.mediaType);
     }
 
     public ImageConfig() {
@@ -40,13 +42,16 @@ public class ImageConfig implements Parcelable {
         this.minHeight = in.readInt();
         this.minSize = in.readLong();
         this.mimeType = in.createStringArray();
+        this.mediaType = in.createIntArray();
     }
 
     public static final Creator<ImageConfig> CREATOR = new Creator<ImageConfig>() {
+        @Override
         public ImageConfig createFromParcel(Parcel source) {
             return new ImageConfig(source);
         }
 
+        @Override
         public ImageConfig[] newArray(int size) {
             return new ImageConfig[size];
         }

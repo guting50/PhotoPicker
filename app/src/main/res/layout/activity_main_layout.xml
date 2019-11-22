@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootView"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:orientation="vertical">
 
-</LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        android:text="img" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/img_and_video"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:text="img_and_video" />
+
+</FrameLayout>
