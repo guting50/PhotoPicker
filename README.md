@@ -1,4 +1,6 @@
 [![](https://jitpack.io/v/guting50/PhotoPicker.svg)](https://jitpack.io/#guting50/PhotoPicker)
+[![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15) 
+[![作者](https://img.shields.io/badge/%E4%BD%9C%E8%80%85-guting50-brightgreen.svg)](https://github.com/guting50)
 
 ## 拍照、图片选择框架
 #### 使用方法：
