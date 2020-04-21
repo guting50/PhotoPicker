@@ -63,21 +63,25 @@
 #### api
 ##### 设置选择模式，默认单张 单选（SelectModel.SINGLE）还是多选（SelectModel.MULTI）
 ```Java
-void setSelectModel(SelectModel model);
+PhotoPickerIntent setSelectModel(SelectModel model);
+```
+##### 单选模式下是否显示图片编辑
+```Java
+PhotoPickerIntent setShowEdit(boolean bool);
 ```
 ##### 设置最大勾选数量，默认为9张图片
 ```Java
-void setMaxTotal(int total);
+PhotoPickerIntent setMaxTotal(int total);
 ```
 ##### 设置是否显示拍照按钮 默认不显示
 ```Java
-void setShowCarema(boolean bool);
+PhotoPickerIntent setShowCarema(boolean bool);
 ```
 ##### 默认已选择的照片地址（做回显用）
 ```Java
-void setSelectedPaths(ArrayList<String> imagePathis);
+PhotoPickerIntent setSelectedPaths(ArrayList<String> imagePathis);
 ```
 ##### 显示相册图片的属性（详见 ImageConfig）
 ```Java
-void setImageConfig(ImageConfig config);
+PhotoPickerIntent setImageConfig(ImageConfig config);
 ```
