@@ -6,19 +6,12 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.gt.photopicker.widget.ViewPagerFixed;
 import com.gt.utils.FileUtils;
 import com.yalantis.ucrop.UCrop;
@@ -29,8 +22,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 /**
- * Created by foamtrace on 2015/8/25.
+ * 预览照片
+ * Created by gt on 2015/8/25.
  */
 public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPagerAdapter.PhotoViewClickListener {
 
@@ -183,7 +182,8 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
                 Uri imageUri = Uri.fromFile(photoFile);
                 UCrop.Options options = new UCrop.Options();
                 options.setToolbarColor(Color.parseColor("#ff212121"));
-                options.setStatusBarColor(Color.parseColor("#000000"));
+                options.setStatusBarColor(Color.parseColor("#ff000000"));
+                options.setToolbarWidgetColor(Color.parseColor("#ffffffff"));
                 File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
                         + File.separator + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg");
                 UCrop.of(imageUri, Uri.fromFile(storageDir))

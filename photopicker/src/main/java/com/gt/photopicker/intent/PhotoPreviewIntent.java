@@ -21,15 +21,17 @@ public class PhotoPreviewIntent extends Intent{
      * 照片地址
      * @param paths
      */
-    public void setPhotoPaths(ArrayList<String> paths){
+    public PhotoPreviewIntent setPhotoPaths(ArrayList<String> paths){
         this.putStringArrayListExtra(PhotoPreviewActivity.EXTRA_PHOTOS, paths);
+        return this;
     }
 
     /**
      * 当前照片的下标
      * @param currentItem
      */
-    public void setCurrentItem(int currentItem){
+    public PhotoPreviewIntent setCurrentItem(int currentItem){
         this.putExtra(PhotoPreviewActivity.EXTRA_CURRENT_ITEM, currentItem);
+        return this;
     }
 }

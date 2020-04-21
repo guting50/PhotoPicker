@@ -2,7 +2,6 @@ package com.gt.photopicker.intent;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.gt.photopicker.ImageConfig;
 import com.gt.photopicker.PhotoPickerActivity;
@@ -29,8 +28,9 @@ public class PhotoPickerIntent extends Intent {
      *
      * @param bool
      */
-    public void setShowCarema(boolean bool) {
+    public PhotoPickerIntent setShowCarema(boolean bool) {
         this.putExtra(PhotoPickerActivity.EXTRA_SHOW_CAMERA, bool);
+        return this;
     }
 
     /**
@@ -38,8 +38,9 @@ public class PhotoPickerIntent extends Intent {
      *
      * @param total
      */
-    public void setMaxTotal(int total) {
+    public PhotoPickerIntent setMaxTotal(int total) {
         this.putExtra(PhotoPickerActivity.EXTRA_SELECT_COUNT, total);
+        return this;
     }
 
     /**
@@ -47,8 +48,19 @@ public class PhotoPickerIntent extends Intent {
      *
      * @param model
      */
-    public void setSelectModel(SelectModel model) {
+    public PhotoPickerIntent setSelectModel(SelectModel model) {
         this.putExtra(PhotoPickerActivity.EXTRA_SELECT_MODE, Integer.parseInt(model.toString()));
+        return this;
+    }
+
+    /**
+     * 单选模式下是否显示图片编辑
+     *
+     * @param bool
+     */
+    public PhotoPickerIntent setShowEdit(boolean bool) {
+        this.putExtra(PhotoPickerActivity.EXTRA_SHOW_EDIT, bool);
+        return this;
     }
 
     /**
@@ -56,8 +68,9 @@ public class PhotoPickerIntent extends Intent {
      *
      * @param imagePathis
      */
-    public void setSelectedPaths(ArrayList<String> imagePathis) {
+    public PhotoPickerIntent setSelectedPaths(ArrayList<String> imagePathis) {
         this.putStringArrayListExtra(PhotoPickerActivity.EXTRA_DEFAULT_SELECTED_LIST, imagePathis);
+        return this;
     }
 
     /**
@@ -65,11 +78,12 @@ public class PhotoPickerIntent extends Intent {
      *
      * @param config
      */
-    public void setImageConfig(ImageConfig config) {
+    public PhotoPickerIntent setImageConfig(ImageConfig config) {
         this.putExtra(PhotoPickerActivity.EXTRA_IMAGE_CONFIG, config);
+        return this;
     }
 
-    public synchronized void gotoPhotoPickerActivity(Context context, PhotoPickerActivity.OnSelectedCallbackListener listener) {
+    public synchronized PhotoPickerIntent gotoPhotoPickerActivity(Context context, PhotoPickerActivity.OnSelectedCallbackListener listener) {
         long key = new Date().getTime();
         PhotoPickerActivity.callbackListeners.put(key, listener);
         this.putExtra("key", key);
@@ -79,5 +93,6 @@ public class PhotoPickerIntent extends Intent {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return this;
     }
 }

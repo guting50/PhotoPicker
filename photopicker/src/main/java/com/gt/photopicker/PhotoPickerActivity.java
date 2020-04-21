@@ -8,16 +8,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ListPopupWindow;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -29,15 +22,28 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.gt.photopicker.intent.PhotoPreviewIntent;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.Toolbar;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
+
+/**
+ * 选择照片
+ */
 public class PhotoPickerActivity extends AppCompatActivity {
 
     public static final String TAG = PhotoPickerActivity.class.getName();
@@ -56,6 +62,10 @@ public class PhotoPickerActivity extends AppCompatActivity {
      * 多选
      */
     public static final int MODE_MULTI = 1;
+    /**
+     * 是否显示图片编辑，boolean类型
+     */
+    public static final String EXTRA_SHOW_EDIT = "show_edit";
     /**
      * 最大图片选择次数，int类型
      */
@@ -327,6 +337,11 @@ public class PhotoPickerActivity extends AppCompatActivity {
                         mImageAdapter.setDefaultSelected(resultList);
                     }
                     break;
+                case UCrop.REQUEST_CROP:
+                    final Uri resultUri = UCrop.getOutput(data);
+                    this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, resultUri));
+                    complete(resultUri.getPath());
+                    break;
             }
         }
     }
@@ -390,7 +405,7 @@ public class PhotoPickerActivity extends AppCompatActivity {
                 mImageAdapter.select(image);
             } else if (mode == MODE_SINGLE) {
                 // 单选模式
-                complete(image.path);
+                showEdit(image.path);
             }
         }
     }
@@ -577,6 +592,25 @@ public class PhotoPickerActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void showEdit(String path) {
+        if (getIntent().getBooleanExtra(EXTRA_SHOW_CAMERA, false)) {
+            File photoFile = new File(path);
+            Uri imageUri = Uri.fromFile(photoFile);
+            UCrop.Options options = new UCrop.Options();
+            options.setToolbarColor(Color.parseColor("#ff212121"));
+            options.setStatusBarColor(Color.parseColor("#ff000000"));
+            options.setToolbarWidgetColor(Color.parseColor("#ffffffff"));
+            File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
+                    + File.separator + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg");
+            UCrop.of(imageUri, Uri.fromFile(storageDir))
+                    .withOptions(options)
+                    .start(this);
+        } else {
+            complete(path);
+        }
     }
 
     // 返回已选择的图片数据
