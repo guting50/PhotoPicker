@@ -596,7 +596,7 @@ public class PhotoPickerActivity extends AppCompatActivity {
 
 
     private void showEdit(String path) {
-        if (getIntent().getBooleanExtra(EXTRA_SHOW_CAMERA, false)) {
+        if (getIntent().getBooleanExtra(EXTRA_SHOW_EDIT, false)) {
             File photoFile = new File(path);
             Uri imageUri = Uri.fromFile(photoFile);
             UCrop.Options options = new UCrop.Options();
