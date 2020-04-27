@@ -3,3 +3,4 @@ app/build/
 .idea/misc.xml
 .idea/
 *.iml
+local.properties
