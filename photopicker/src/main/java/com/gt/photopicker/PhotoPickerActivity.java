@@ -343,6 +343,9 @@ public class PhotoPickerActivity extends AppCompatActivity {
                     complete(resultUri.getPath());
                     break;
             }
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+            Toast.makeText(this, cropError.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
