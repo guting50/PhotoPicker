@@ -3,12 +3,7 @@ package com.gt.photopicker;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-
-import androidx.core.content.FileProvider;
-import androidx.viewpager.widget.PagerAdapter;
-
 import android.os.Build;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +14,14 @@ import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.gt.photopicker.intent.PhotoPickerIntent;
 import com.gt.utils.FileUtils;
-import com.gt.utils.view.OnNoDoubleClickListener;
+import com.gt.utils.widget.OnNoDoubleClickListener;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.core.content.FileProvider;
+import androidx.viewpager.widget.PagerAdapter;
 
 
 /**
