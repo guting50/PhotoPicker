@@ -22,6 +22,8 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.gt.photopicker.intent.PhotoPreviewIntent;
+import com.gt.utils.widget.AntiShake;
+import com.gt.utils.widget.OnNoDoubleClickListener;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -157,22 +159,19 @@ public class PhotoPickerActivity extends AppCompatActivity {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (mImageAdapter.isShowCamera()) {
-                    // 如果显示照相机，则第一个Grid显示为照相机，处理特殊逻辑
-                    if (i == 0) {
-                        if (mode == MODE_MULTI) {
-                            // 判断选择数量问题
-                            if (mDesireImageCount == resultList.size() - 1) {
-                                Toast.makeText(mCxt, getString(R.string.msg_amount_limit, mDesireImageCount), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
+                if (AntiShake.check(view.getId())) {
+                    return;
+                }
+                // 如果显示照相机，则第一个Grid显示为照相机，处理特殊逻辑
+                if (mImageAdapter.isShowCamera() && i == 0) {
+                    if (mode == MODE_MULTI) {
+                        // 判断选择数量问题
+                        if (mDesireImageCount == resultList.size() - 1) {
+                            Toast.makeText(mCxt, getString(R.string.msg_amount_limit, mDesireImageCount), Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                        showCameraAction();
-                    } else {
-                        // 正常操作
-                        Image image = (Image) adapterView.getAdapter().getItem(i);
-                        selectImageFromGrid(image, mode);
                     }
+                    showCameraAction();
                 } else {
                     // 正常操作
                     Image image = (Image) adapterView.getAdapter().getItem(i);
@@ -184,9 +183,9 @@ public class PhotoPickerActivity extends AppCompatActivity {
         mFolderAdapter = new FolderAdapter(mCxt);
 
         // 打开相册列表
-        btnAlbum.setOnClickListener(new View.OnClickListener() {
+        btnAlbum.setOnClickListener(new OnNoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onNoDoubleClick(View v) {
                 if (mFolderPopupWindow == null) {
                     createPopupFolderList();
                 }
@@ -203,9 +202,9 @@ public class PhotoPickerActivity extends AppCompatActivity {
         });
 
         // 预览
-        btnPreview.setOnClickListener(new View.OnClickListener() {
+        btnPreview.setOnClickListener(new OnNoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onNoDoubleClick(View v) {
                 PhotoPreviewIntent intent = new PhotoPreviewIntent(mCxt);
                 intent.setCurrentItem(0);
                 intent.setPhotoPaths(resultList);
@@ -626,9 +625,11 @@ public class PhotoPickerActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(path))
             resultList.add(path);
 
-        OnSelectedCallbackListener listener = callbackListeners.get(getIntent().getLongExtra("key", -1));
+        Long key = getIntent().getLongExtra("key", -1);
+        OnSelectedCallbackListener listener = callbackListeners.get(key);
         if (listener != null) {
             listener.onSelectedCallback(resultList);
+            callbackListeners.remove(key);
         }
 
         Intent data = new Intent();

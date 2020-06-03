@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.gt.photopicker.widget.ViewPagerFixed;
 import com.gt.utils.FileUtils;
+import com.gt.utils.widget.AntiShake;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -126,8 +127,10 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int i = item.getItemId();
+        if (AntiShake.check(i, 500)) {
+            return super.onOptionsItemSelected(item);
+        }
         if (i == android.R.id.home) {
             onBackPressed();
         } else if (i == R.id.action_discard) {
@@ -198,6 +201,7 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             final Uri resultUri = UCrop.getOutput(data);
             Collections.replaceAll(paths, currentPath, resultUri.getPath());

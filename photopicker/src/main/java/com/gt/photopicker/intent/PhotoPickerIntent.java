@@ -28,7 +28,18 @@ public class PhotoPickerIntent extends Intent {
      *
      * @param bool
      */
+    @Deprecated
     public PhotoPickerIntent setShowCarema(boolean bool) {
+        this.putExtra(PhotoPickerActivity.EXTRA_SHOW_CAMERA, bool);
+        return this;
+    }
+
+    /**
+     * 是否显示拍照按钮 默认不显示
+     *
+     * @param bool
+     */
+    public PhotoPickerIntent showCarema(boolean bool) {
         this.putExtra(PhotoPickerActivity.EXTRA_SHOW_CAMERA, bool);
         return this;
     }
@@ -58,7 +69,18 @@ public class PhotoPickerIntent extends Intent {
      *
      * @param bool
      */
+    @Deprecated
     public PhotoPickerIntent setShowEdit(boolean bool) {
+        this.putExtra(PhotoPickerActivity.EXTRA_SHOW_EDIT, bool);
+        return this;
+    }
+
+    /**
+     * 单选模式下是否显示图片编辑
+     *
+     * @param bool
+     */
+    public PhotoPickerIntent showEdit(boolean bool) {
         this.putExtra(PhotoPickerActivity.EXTRA_SHOW_EDIT, bool);
         return this;
     }

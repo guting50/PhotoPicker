@@ -4,11 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.app.ActivityCompat;
-
 import android.provider.MediaStore;
 import android.view.View;
 
@@ -18,6 +13,10 @@ import com.gt.photopicker.SelectModel;
 import com.gt.photopicker.intent.PhotoPickerIntent;
 
 import java.util.ArrayList;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.app.ActivityCompat;
 
 public class MainActivity extends Activity {
     AppCompatTextView textView;
@@ -34,8 +33,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 textView.setText(textView.getText().toString() + "\n" + "<<<<<<<< img >>>>>>>>");
                 PhotoPickerIntent intent = new PhotoPickerIntent(MainActivity.this);
-                intent.setSelectModel(SelectModel.MULTI);
-                intent.setShowCarema(true);
+                intent.setSelectModel(SelectModel.SINGLE);
+                intent.showEdit(true);
+                intent.showCarema(true);
                 //方式一
 //                startActivityForResult(intent, 999);
                 //方式二
