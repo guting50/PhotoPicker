@@ -159,9 +159,6 @@ public class PhotoPickerActivity extends AppCompatActivity {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (AntiShake.check(view.getId())) {
-                    return;
-                }
                 // 如果显示照相机，则第一个Grid显示为照相机，处理特殊逻辑
                 if (mImageAdapter.isShowCamera() && i == 0) {
                     if (mode == MODE_MULTI) {
@@ -599,6 +596,9 @@ public class PhotoPickerActivity extends AppCompatActivity {
 
 
     private void showEdit(String path) {
+        if (AntiShake.check(-1)) {
+            return;
+        }
         if (getIntent().getBooleanExtra(EXTRA_SHOW_EDIT, false)) {
             File photoFile = new File(path);
             Uri imageUri = Uri.fromFile(photoFile);
