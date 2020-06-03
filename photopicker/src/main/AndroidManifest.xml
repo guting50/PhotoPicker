@@ -11,14 +11,17 @@
         <activity
             android:name="com.gt.photopicker.PhotoPickerActivity"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:theme="@style/PhotoPickerTheme" />
 
         <activity
             android:name="com.gt.photopicker.PhotoPreviewActivity"
+            android:launchMode="singleTask"
             android:theme="@style/PhotoPickerTheme" />
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
