@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.gt.photopicker.widget.ViewPagerFixed;
-import com.gt.utils.FileUtils;
-import com.gt.utils.widget.AntiShake;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;

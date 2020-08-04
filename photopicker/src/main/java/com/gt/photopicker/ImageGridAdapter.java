@@ -9,7 +9,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.gt.utils.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -255,5 +254,4 @@ public class ImageGridAdapter extends BaseAdapter {
             }
         }
     }
-
 }

@@ -22,8 +22,6 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.gt.photopicker.intent.PhotoPreviewIntent;
-import com.gt.utils.widget.AntiShake;
-import com.gt.utils.widget.OnNoDoubleClickListener;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;

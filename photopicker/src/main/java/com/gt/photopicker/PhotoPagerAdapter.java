@@ -13,8 +13,6 @@ import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.gt.photopicker.intent.PhotoPickerIntent;
-import com.gt.utils.FileUtils;
-import com.gt.utils.widget.OnNoDoubleClickListener;
 
 import java.io.File;
 import java.util.ArrayList;
