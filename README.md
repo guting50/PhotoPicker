@@ -47,17 +47,15 @@
 ```
 ##### 方式二
 ```Java
-  PhotoPickerIntent intent = new PhotoPickerIntent(MainActivity.this);
+  PhotoPickerIntent intent = new PhotoPickerIntent(mContext);
   intent.setSelectModel(SelectModel.MULTI);
-  intent.setShowCarema(true);
-  intent.gotoPhotoPickerActivity(MainActivity.this, new PhotoPickerActivity.OnSelectedCallbackListener() {
-        @Override
-                    public void onSelectedCallback(ArrayList<String> resultList) {
-                        for (String str : resultList) {
-                            Log.e("imgPath", str);
-                        }
-                    }
-                });
+  intent.showCarema(true);
+  intent.gotoPhotoPickerActivity(mContext,
+          resultList -> {
+              for (String str : resultList) {
+                  Log.e("imgPath", str);
+              }
+          });
 ```
 
 #### api
