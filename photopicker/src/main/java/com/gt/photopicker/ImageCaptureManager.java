@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.core.content.FileProvider;
-
 import com.gt.photopicker.intent.PhotoPickerIntent;
 
 import java.io.File;
@@ -26,6 +25,7 @@ public class ImageCaptureManager {
 
     private final static String CAPTURED_PHOTO_PATH_KEY = "mCurrentPhotoPath";
     public static final int REQUEST_TAKE_PHOTO = 1;
+    public static File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
     private String mCurrentPhotoPath;
     private Context mContext;
@@ -39,7 +39,6 @@ public class ImageCaptureManager {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         if (!storageDir.exists()) {
             if (!storageDir.mkdir()) {
                 throw new IOException();
